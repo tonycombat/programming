@@ -1,7 +1,7 @@
 ##############################
 ## - Kevin Winston, 10339721##
 ##############################
-from car import  *
+from car import  * # Import the classes 
 
 class Dealership(object):
     
@@ -13,7 +13,7 @@ class Dealership(object):
        self.diesel_cars = []
 
     	
-    def current_stock(self):
+    def current_stock(self): # populates the inventory
         for i in range(10):
 			self.electric_cars.append(ElectricCar())
         for i in range(60):
@@ -25,14 +25,14 @@ class Dealership(object):
         for i in range(5):
             self.rotary_cars.append(RotaryCar())
     
-    def stock_count(self):   
+    def stock_count(self):   # displays the current inventory
         print 'Petrol Cars in stock: ' + str(len(self.petrol_cars))
         print 'Electric Cars in stock: ' + str(len(self.electric_cars))
         print 'Diesel Cars in stock: ' + str(len(self.diesel_cars))
         print 'hybrid Cars in stock: ' + str(len(self.hybrid_cars))
         print 'Rotary Cars in stock: ' + str(len(self.rotary_cars))
 
-    def rent(self, car_list, amount):
+    def rent(self, car_list, amount): # Tracks the number of cars currently available
         if len(car_list) < amount:
             print 'Not enough stock'
             return
@@ -42,9 +42,9 @@ class Dealership(object):
             total = total + 1
     
     
-    def process_rental(self):
-        
-        answer = raw_input('What type of Car would you like to rent?:\n p-Petrol\n e-Electric\n d-Diesel\n h-hybrid\n r-Rotary: ')
+    def process_rental(self): #Gives the customer a choice of vehicles
+                
+        answer = raw_input('What type of Car would you like to rent?:\n p-Petrol\n e-Electric\n d-Diesel\n h-hybrid\n r-Rotary: ') 
         amount = int(raw_input('How many would you like to rent?: '))
         if answer == 'p':
             self.rent(self.petrol_cars, amount)
@@ -59,10 +59,10 @@ class Dealership(object):
 
         dealership.stock_count()    
         
-    def returns(self, car_list, amount):
+    def returns(self, car_list, amount): #Allows vehicles to be returned to the inventory
         total = 0
         if amount < 0:
-            print 'We cannot return negative cars ;)'
+            print 'Value Error '
         elif amount == 0:
             print 'Do you wish to extend your lease.'
         else:
@@ -71,7 +71,7 @@ class Dealership(object):
                 total = total + 1
             print 'Vehicle(s) returned successfully.'
     
-    def CarReturn(self):
+    def CarReturn(self): # Determines which list returning vehicles should be added to 
         type = raw_input("Which type of car are you returning?\nElectric - e\nPetrol - p\nHybrid - h\nDiesel - d\n Rotary - r\n: ")
         amount = int(raw_input('How many vehicles are you returning?\n: '))
         if type == 'e' and len(self.electric_cars) + amount <= 10:
@@ -85,7 +85,7 @@ class Dealership(object):
         elif type =='r' and len(self.rotary_cars) + amount <= 5:
                 self.returns(self.rotary_cars, amount)    
         
-    def interface(self):
+    def frontend(self): # Takes the users input, allowing either the rental or return of a vehicle
         print 'Welcome to DBS Car Rental. This is our current stock:\n'
         self.stock_count()
         user = raw_input("Do you wish to rent 'r' or return 't' a car?\n: ")
@@ -102,7 +102,7 @@ if __name__ == '__main__':
     
     while cont == 'y':
         try:
-            rent.interface()
+            rent.frontend()
         except:
             print 'Thank you.'
         cont = raw_input('Do you wish to continue? y/n: ')
